@@ -1,0 +1,122 @@
+---
+title: "Homework 1: Epidemiological Data and Measures of Risk"
+subtitle: "STAT 244NF: Infectious Disease Modeling"
+author: "YOUR NAME HERE"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: pdf_document
+---
+
+## Instructions:
+
+1. Please replace "YOUR NAME HERE" under author above with your name before you knit your final document for submission.
+2. All of your homework needs to be completed in this document, whether it requires R or just typed responses. As we incorporate more statistical computing into the course, it will be important that you are comfortable with R Markdown, so start now. Remember that R Markdown gives us a convenient framework for reproducible statistical reports because it contains a complete record of our analyses and conclusions.
+3. You may knit to PDF, HTML, or Word (click on the drop-down menu for Knit to choose the file output type). 
+4. Before submitting your work, please make sure the knitted file is well organized, legible, and looks the way you expect!
+5. Please include the names of any classmates with whom you worked on this homework, as well as any external resources that you might have used.
+6. This homework assignment is **due on Friday, February 2, 2024 and should be submitted to Gradescope**.
+
+- *Collaborators:*
+
+- *External resources:*
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+## Load libraries
+library(outbreaks)
+library(dplyr)
+library(ggplot2)
+```
+
+## Epidemiological Data
+
+For Questions EpD 1-3, consider the following scenario:
+
+**Suppose that a number of passengers on a cruise ship have recently developed a gastrointestinal illness called norovirus infection. You are the infectious disease expert on board the ship, and are responsible for collecting and summarizing relevant information to understand the outbreak.**
+
+Norovirus illness is a contagious viral infection that is transmitted through direct contact with an infected person, eating or drinking contaminated food or water, or touching contaminated surfaces and then putting your hands in your mouth before washing them. If you would like to know more about norovirus, please consult the CDC reference below.
+
+*Reference:* https://www.cdc.gov/norovirus/index.html
+
+### Question EpD 1:
+
+Thinking about the essential characteristics necessary for descriptive epidemiology, time, place, and person, describe the information you would collect if you were responsible for recording information to understand this outbreak on the ship. 
+
+### Answer EpD 1:
+
+- Time:
+- Place:
+- Person:
+
+### Question EpD 2:
+
+Would it be most appropriate to display the time course of the norovirus outbreak on the ship as (a) an epidemic curve, (b) a long-term trend, or (c) a seasonal trend? Please explain your answer and describe what the plot would look like in 1-3 sentences. You should include specifics, including what information would be represented on the x- and y-axes for your choice.
+
+### Answer EpD 2:
+
+
+
+### Question EpD 3:
+
+After your data collection, you suspect that the norovirus may have been transmitted by ice made or served aboard the cruise ship. You want to visualize how well your theory agrees with the data and decide to make a map to visualize "place". For this purpose, would it be most appropriate to display place as (a) a map of the dining room, where each infected passenger's dinner seating location is represented by a dot, (b) a map of the ship, where each infected passenger's cabin is represented by a dot, (c) a map of the world, where each infected passenger's home country is shaded, or (d) a list of all passengers' names, where infection status and whether or not they consumed ice aboard ship are recorded. Please explain your answer in 1-3 sentences.
+
+### Answer EpD 3:
+
+
+## Practice plotting epidemic curves
+
+### Question EC 1:
+
+Create an epidemic curve for the `fluH7N9_china_2013` using ggplot2 package. Because there is a separate line for each case, the most useful geometry here will be geom_histogram (we saw `geom_point` and `geom_col` in our Lab 0). Change the axis labels to "Date of Onset" and "Number of Cases". 
+
+### Answer EC 1:
+
+```{r fig.align='center'}
+
+```
+
+### Question EC 2:
+
+It can be useful to look at cases split out by various components of person, like age (`age_new`) or a dichotomous sex variable (`gender`). We can use color to distinguish between those in a histogram. Copy your code from Answer MR 4 and paste it in a new R chunk below. Use the fill aesthetic to add color to distinguish those recorded as male or female in your histogram. (If you're stuck, consider looking at the examples at the bottom of the help documentation for `geom_histogram`, which can be accessed by running `?geom_histogram`.) 
+
+### Answer EC 2:
+
+```{r}
+
+```
+
+### Question EC 3:
+
+Now, let's do the same thing, but for age. Run the code below to create a new column that contains a factor variable for `age_group`. Then make a histogram that uses the fill aesthetic to how the different ages for patients in this data set.  
+
+```{r}
+fluH7N9_china_2013 <- fluH7N9_china_2013 %>%
+  mutate(
+    age_group = ifelse(age_new < 16, "0-15",
+                       ifelse(age_new >= 16 & age_new < 60, "16-59",
+                              ifelse(age_new >= 60 & age_new < 65, "60-64", "65+")))
+  )
+```
+
+### Answer EC 3:
+
+```{r}
+
+```
+
+
+### Question EC 4:
+
+Using some other relevant piece of information from the data set, make a new histogram that summarizes the epidemic curve according to another piece of information relevant to "person". There are multiple appropriate answers to this question.
+
+
+### Answer EC 4:
+
+```{r}
+
+```
+
+## References
+
+- HIV/AIDS Surveillance Report. https://www.cdc.gov/hiv/pdf/statistics_2005_hiv_surveillance_report_vol_17.pdf
+- Pew Research Center. U.S. Population Projections: 2005-2050. https://www.pewresearch.org/hispanic/2008/02/11/us-population-projections-2005-2050/
