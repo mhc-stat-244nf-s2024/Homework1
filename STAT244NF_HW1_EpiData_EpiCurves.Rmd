@@ -77,13 +77,23 @@ Create an epidemic curve for the `fluH7N9_china_2013` using ggplot2 package. Bec
 
 ### Question EC 2:
 
-It can be useful to look at cases split out by various components of person, like age (`age_new`) or a dichotomous sex variable (`gender`). We can use color to distinguish between those in a histogram. Copy your code from Answer MR 4 and paste it in a new R chunk below. Use the fill aesthetic to add color to distinguish those recorded as male or female in your histogram. (If you're stuck, consider looking at the examples at the bottom of the help documentation for `geom_histogram`, which can be accessed by running `?geom_histogram`.) 
+It can be useful to look at cases split out by various components of person, like age (`age_new`) or a dichotomous sex variable (`gender`). We can use color to distinguish between those in a histogram. Adding to the code below, use the fill aesthetic to add color to distinguish those recorded as male or female in your histogram. (If you're stuck, consider looking at the examples at the bottom of the help documentation for `geom_histogram`, which can be accessed by running `?geom_histogram`.) 
+
+```{r}
+## age was read in as a factor because missing values were encoded as "?"
+## this code replaces "?" with NA and creates a new numeric column called age_new
+fluH7N9_china_2013 <- fluH7N9_china_2013 %>%
+  mutate(
+    age_new = as.numeric(as.character(replace(age, age == "?", NA)))
+  ) 
+```
 
 ### Answer EC 2:
 
 ```{r}
 
 ```
+
 
 ### Question EC 3:
 
